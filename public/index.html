@@ -15,8 +15,21 @@
             
             <p>Name: KOWSIK REDDY TUMMURI</p>
             <p>Student ID: 1001832384</p>
-
-            <img src="./img/aws.jpg" style="width:100px;height:100px;">
+            
+            <img src="img/aws.jpg" style="width:100px;height:100px;">
+            <h3 id='seconds-counter'> </h3>
+                <script>
+                    var seconds = 0;
+                    var el = document.getElementById('seconds-counter');
+            
+                    function incrementSeconds() {
+                        seconds += 1;
+                        el.innerText = "Counter " + seconds + " seconds.";
+                    }
+                    
+                    var cancel = setInterval(incrementSeconds, 1000);
+                
+                </script>
           </div>
         <!-- <div class="graphics">
             <div class="tower">
@@ -49,7 +62,7 @@
                 </svg>
 
             </div>
-        </div> -->
+        </div>
 
         <header>
             <nav class="website-nav">
@@ -73,9 +86,10 @@
 
     <footer>
         <p class="footer-contents">Designed and developed with <a href="https://aws.amazon.com/careers/devtools-jobs/">♥</a> in Seattle.</p>
-    </footer>
+    </footer> -->
 
-    <script src="js/set-background.js"></script>
+    <!-- <script src="js/set-background.js"></script> -->
+    <!-- <script src="js/increment.js"></script> -->
 </body>
 
 </html>
