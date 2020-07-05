@@ -6,37 +6,12 @@ const conn = require("./connection");
 //const random = require('random');
 
 
-    var path = require("path");
-    const{Connection,Request}=require("tedious");
-    //const { result } = require("lodash");
+var path = require("path");
+const{Connection,Request}=require("tedious");
 
-//calling root folder from server.js by app.use("/profile", PeopleRoutes);
-    Router.get("/", (req,res)=>{
+Router.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname+'/../../index.html'));
 })
-
-
-
-// Router.post("/retrive_redis", (req,res)=>{
-//     var val = req.body.Value;
-//     var newobj = {};
-//     const starttime = Date.now();
-//     var sql=`select year,NumberTerroristIncidents,Entity from ti where code='${val}' order by year asc;`;
-//     const call=new Request(sql,(err,rowCount,rows)=>{
-//         if (err) {
-//         console.error(err.message);
-//         }else{
-         
-//         console.log(`${rowCount} row(s) returned`);
-//         console.log(rows);
-//         newobj["timeTaken"] = (Date.now() - starttime);
-//         rows.push(newobj);
-//         res.json(rows);
-//         }
-//         });
-         
-//         conn.execSql(call);
-// });
 
 // ----------------------------------------------Form1-------------------------------------------------
 Router.post("/form1", (req,res)=>{
