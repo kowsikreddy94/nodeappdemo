@@ -13,6 +13,25 @@ Router.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname+'/../../index.html'));
 })
 
+const superagent = require('superagent');
+
+Router.get("/getIP", (req,resp)=>{
+    var data;
+    
+
+    superagent.get('https://checkip.amazonaws.com').end((err, res) => {
+        if (err) { 
+            return console.log(err); 
+        }
+        console.log(res.body);
+        console.log("res.text = ",res.text);
+        // console.log('res = ',res)
+        resp.send(res);
+    });
+
+    
+})
+
 // ----------------------------------------------Form1-------------------------------------------------
 Router.post("/form1", (req,res)=>{
     var code = req.body.a1;
@@ -23,12 +42,12 @@ Router.post("/form1", (req,res)=>{
     var sql=`select * from s where code = '${code}';`;
     const request =new Request(sql,(err,rowCount,rows)=>{
         if (err) {
-        console.error(err.message);
+            console.error(err.message);
         }else{
          
-        console.log(`${rowCount} row(s) returned`);
-        console.log(rows);
-        res.send(rows);
+            console.log(`${rowCount} row(s) returned`);
+            console.log(rows);
+            res.send(rows);
         }
         });
          
@@ -56,7 +75,7 @@ Router.post("/form2", (req,res)=>{
          
         conn.execSql(request);
 });
-// ----------------------------------------------bar-------------------------------------------------
+// --------------------------------------------Form3 bar-------------------------------------------------
 Router.post("/form3", (req,res)=>{
     var year1 = req.body.a1;//1980
     var year2 = req.body.a2;//2012

@@ -1,4 +1,45 @@
 //*******************Form1 Function ********************************
+function getIPf() {
+  console.log("getIP");
+  // var a1 = document.forms["form1"]["a1"].value;
+  // var a2 = document.forms["form1"]["a2"].value;
+  // var a3 = document.forms["form1"]["a3"].value;
+ 
+  
+    fetch('/getIP', 
+    {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+      //body: JSON.stringify({a1: a1})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      console.log("in getIPF data = ",data)
+      getIPHtml(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    }); 
+    return false;
+
+}
+
+function getIPHtml(data){
+    
+    console.log("IP = ",data.text)
+    document.getElementById("IP").innerHTML = "";
+    var mainContainer = document.getElementById("IP");    
+    // var div = document.createElement("h3");
+    // div.style.padding = '20px';
+    document.getElementById("IP").innerHTML = "IP Address = "+data.text;
+    // div.innerHTML = "IP Address = "+data.text;
+    // mainContainer.appendChild(div); 
+    
+  
+
+}
+//*******************Form1 Function ********************************
   function form1f() {
     console.log("form1");
     var a1 = document.forms["form1"]["a1"].value;
@@ -90,6 +131,7 @@
 
 //******************************************************************
 
+//****************************Form3*********************************
 function form3f() {
   var a1 = document.forms["form3"]["a1"].value;
   var a2 = document.forms["form3"]["a2"].value;
@@ -177,3 +219,4 @@ function form3html(data) {
 }); 
  }
 
+//******************************************************************
