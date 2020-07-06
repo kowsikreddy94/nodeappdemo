@@ -57,13 +57,13 @@ Router.post("/form2", (req,res)=>{
         conn.execSql(request);
 });
 // ----------------------------------------------bar-------------------------------------------------
-Router.post("/bar_example", (req,res)=>{
-    var fir = req.body.First;//1980
-    var sec = req.body.Second;//2012
-    var thr = req.body.Third;//2012
+Router.post("/form3", (req,res)=>{
+    var year1 = req.body.a1;//1980
+    var year2 = req.body.a2;//2012
+    var countryCode = req.body.a3;//2012
 
-    console.log(fir + ""+sec + ""+thr);
-    var sql=`select * from s4 where entity = '${fir}' and year between '${sec}' and '${thr}';`;
+    console.log("year1 = "+year1 + " year2 = "+year2 + " countryCode = "+countryCode);
+    var sql=`select * from s where code = '${countryCode}' and year between '${year1}' and '${year2}';`;
     const call=new Request(sql,(err,rowCount,rows)=>{
         if (err) {
         console.error(err.message);

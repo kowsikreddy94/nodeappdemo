@@ -42,7 +42,9 @@
         }
   }
 
-  //*******************Form1 Function ********************************
+  //******************************************************************
+
+  //*******************Form2 Function ********************************
   function form2f() {
     console.log("form2");
     var a1 = document.forms["form2"]["a1"].value;
@@ -86,29 +88,92 @@
         }
   }
 
-  // function retrive_fun() {
-//   var num = document.forms["retrive_form"]["retrive_no"].value;
-//   if (num == "") {
-//     alert("Name must be filled out");
-//     return false;
-//   }
-//   else{
-//     fetch('/profile/retrive_redis', {
-//       method: 'POST', // or 'PUT'
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({Value: num}),
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log('Success:', data);
-//       retrive_display(data);
-//     })
-//     .catch((error) => {
-//       console.log('Error:', error);
-//     }); 
-//     return false;
-//   }
-// }
+//******************************************************************
+
+function form3f() {
+  var a1 = document.forms["form3"]["a1"].value;
+  var a2 = document.forms["form3"]["a2"].value;
+  var a3 = document.forms["form3"]["a3"].value;
+  console.log(a1 + ""+a2 + ""+a3);
+ fetch('/form3', {
+   method: 'POST', // or 'PUT'
+   headers: {
+     'Content-Type': 'application/json',
+   },
+   body: JSON.stringify({a1: a1,a2: a2,a3: a3}),
+ })
+ .then(response => response.json())
+ .then(data => {
+   console.log('Success:', data);
+   form3html(data);
+ })
+ .catch((error) => {
+   console.error('Error:', error);
+ }); 
+ return false;
+}
+
+function form3html(data) {  
+  // document.getElementById("output_div").innerHTML = "";
+  document.getElementById("highChart").innerHTML = "";
+ var result =[];
+ for(var i=0;i<data.length;i++)
+ {
+ var data_final ={};
+ data_final["x"] = data[i].Year.value;
+ data_final["y"] = data[i].Smokers.value;
+ result.push(data_final);
+ }
+ console.log(result);
+
+ $(document).ready(function() {
+   var chart = {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false
+   };
+   var title = {
+      text: 'Data in bar chart'   
+   };
+   var tooltip = {
+      pointFormat: '{point.x}: <b>{point.y}</b>'
+   };
+   var plotOptions = {
+      bar: {
+         allowPointSelect: true,
+         cursor: 'pointer',
+         
+         dataLabels: {
+           
+            enabled: true,
+           //  format: pointDisplayFormat,
+            inside: true,
+            crop: false,
+            overflow: 'none',
+            align: 'right',
+           format: '<b>{point.x}</b>: {point.y:} ',
+            style: {
+               color: (Highcharts.theme && Highcharts.theme.contrastTextColor)||
+               'black'
+            }
+         }
+      }
+   };
+   
+   var series = [{
+      type: 'bar',
+      name: 'Bar display',
+      color : 'green',
+     //  colorByPoint:true,
+      data: result
+   }];
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;     
+   json.tooltip = tooltip;  
+   json.series = series;
+   json.plotOptions = plotOptions;
+   $('#highChart').highcharts(json);  
+}); 
+ }
 
