@@ -34,6 +34,28 @@ Router.post("/form1", (req,res)=>{
          
         conn.execSql(request);
 });
+
+// ----------------------------------------------Form2-------------------------------------------------
+Router.post("/form2", (req,res)=>{
+    var year1 = req.body.a1;
+    var year2 = req.body.a2;
+    // var countryCode = req.body.a3;
+
+    
+    var sql=`select * from s where Year between '${year1}' and '${year2}';`;
+    const request =new Request(sql,(err,rowCount,rows)=>{
+        if (err) {
+            console.error(err.message);
+        }else{
+         
+            console.log(`${rowCount} row(s) returned`);
+            // console.log(rows);
+            res.send(rows);
+            }
+        });
+         
+        conn.execSql(request);
+});
 // ----------------------------------------------bar-------------------------------------------------
 Router.post("/bar_example", (req,res)=>{
     var fir = req.body.First;//1980
