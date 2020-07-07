@@ -141,226 +141,226 @@ Router.post("/pie_example", (req,res)=>{
         conn.execSql(call);
 });
 
-//************quiz 3 Form1 function database****************************
-Router.post("/form1q3", (req,res)=>{
+// //************quiz 3 Form1 function database****************************
+// Router.post("/form1q3", (req,res)=>{
     
-    var countryCode = req.body.a1;
-    // var lat2 = req.body.lat2;
+//     var countryCode = req.body.a1;
+//     // var lat2 = req.body.lat2;
     
-    var sql=`select year,NumberTerroristIncidents,Entity from dbo.ti where code = '${countryCode}' order by year asc`;
-    var newobj = {};
-    const starttime = Date.now();
-    const request = new Request(sql,(err,rowCount,rows)=>{
-        if (err) 
-        {
-            //console.log("inside error")
-            console.error(err.message);
-        }
-        else
-        {
-           // console.log(`${rowCount} row(s) returned`);
-            //console.log(rows);
-            newobj["timeTaken"] = Date.now() - starttime;
+//     var sql=`select year,NumberTerroristIncidents,Entity from dbo.ti where code = '${countryCode}' order by year asc`;
+//     var newobj = {};
+//     const starttime = Date.now();
+//     const request = new Request(sql,(err,rowCount,rows)=>{
+//         if (err) 
+//         {
+//             //console.log("inside error")
+//             console.error(err.message);
+//         }
+//         else
+//         {
+//            // console.log(`${rowCount} row(s) returned`);
+//             //console.log(rows);
+//             newobj["timeTaken"] = Date.now() - starttime;
                 
-                //newobj["data"] = rows;
-            rows.push(newobj);
-            res.json(rows);    
-        }
-    });
-    conn.execSql(request);
+//                 //newobj["data"] = rows;
+//             rows.push(newobj);
+//             res.json(rows);    
+//         }
+//     });
+//     conn.execSql(request);
 
-})
+// })
 
-//************quiz3 Form2****************************
-Router.post("/form2q3", (req,res)=>{
+// //************quiz3 Form2****************************
+// Router.post("/form2q3", (req,res)=>{
     
-    var year1 = req.body.a1;
-    var year2 = req.body.a2;
+//     var year1 = req.body.a1;
+//     var year2 = req.body.a2;
     
-    var sql= `Select year,NumberTerroristIncidents,Entity from dbo.ti where year between '${year1}' and '${year2}'`;
+//     var sql= `Select year,NumberTerroristIncidents,Entity from dbo.ti where year between '${year1}' and '${year2}'`;
     
-    const starttime = Date.now();
+//     const starttime = Date.now();
 
-    const request = new Request(sql,(error,rowCount,rows)=>{
-        if (error) 
-        {
-            //console.log("inside error")
-            console.error(err.message);
-        }
-        else
-        {
-           console.log(`${rowCount} row(s) returned`);
-            // console.log("Number of data in 1 "+rows[0]);
+//     const request = new Request(sql,(error,rowCount,rows)=>{
+//         if (error) 
+//         {
+//             //console.log("inside error")
+//             console.error(err.message);
+//         }
+//         else
+//         {
+//            console.log(`${rowCount} row(s) returned`);
+//             // console.log("Number of data in 1 "+rows[0]);
 
-            // console.log("Number of data in 2 "+rows[1]);
+//             // console.log("Number of data in 2 "+rows[1]);
             
-            var newobj = {};
-            newobj["timeTaken"] = Date.now() - starttime;    
-            //newobj["data"] = rows;
-            rows.push(newobj);
-            res.json(rows);    
-        }
-    });
-    conn.execSql(request);
+//             var newobj = {};
+//             newobj["timeTaken"] = Date.now() - starttime;    
+//             //newobj["data"] = rows;
+//             rows.push(newobj);
+//             res.json(rows);    
+//         }
+//     });
+//     conn.execSql(request);
 
-})
+// })
 
-//************quiz3 Form2****************************
-Router.post("/form3q3", (req,res)=>{
+// //************quiz3 Form2****************************
+// Router.post("/form3q3", (req,res)=>{
     
-    var year1 = req.body.a1;
-    var year2 = req.body.a2;
+//     var year1 = req.body.a1;
+//     var year2 = req.body.a2;
     
-    var sql = `select count(NumberTerroristIncidents) as count,t.Entity as name from dbo.sp s, dbo.ti t where s.Prevalence between  ${year1} and  ${year2} and s.Code = t.Code group by t.entity`;
+//     var sql = `select count(NumberTerroristIncidents) as count,t.Entity as name from dbo.sp s, dbo.ti t where s.Prevalence between  ${year1} and  ${year2} and s.Code = t.Code group by t.entity`;
 
-    const starttime = Date.now();
+//     const starttime = Date.now();
 
-    const request = new Request(sql,(error,rowCount,rows)=>{
-        if (error) 
-        {
-            //console.log("inside error")
-            console.error(err.message);
-        }
-        else
-        {
-           console.log(`${rowCount} row(s) returned`);
-            // console.log("Number of data in 1 "+rows[0]);
+//     const request = new Request(sql,(error,rowCount,rows)=>{
+//         if (error) 
+//         {
+//             //console.log("inside error")
+//             console.error(err.message);
+//         }
+//         else
+//         {
+//            console.log(`${rowCount} row(s) returned`);
+//             // console.log("Number of data in 1 "+rows[0]);
 
-            // console.log("Number of data in 2 "+rows[1]);
+//             // console.log("Number of data in 2 "+rows[1]);
             
-            var newobj = {};
-            newobj["timeTaken"] = Date.now() - starttime;    
-            //newobj["data"] = rows;
-            rows.push(newobj);
-            res.json(rows);    
-        }
-    });
-    conn.execSql(request);
+//             var newobj = {};
+//             newobj["timeTaken"] = Date.now() - starttime;    
+//             //newobj["data"] = rows;
+//             rows.push(newobj);
+//             res.json(rows);    
+//         }
+//     });
+//     conn.execSql(request);
 
-})
+// })
 
-//************form4 quiz3 function database****************************
-Router.post("/form4q3", (req,res)=>{
-    console.log('in database fun form4q3');
-    var year1 = req.body.a1;
-    var year2 = req.body.a2;
-    var range = req.body.a3;
+// //************form4 quiz3 function database****************************
+// Router.post("/form4q3", (req,res)=>{
+//     console.log('in database fun form4q3');
+//     var year1 = req.body.a1;
+//     var year2 = req.body.a2;
+//     var range = req.body.a3;
 
     
-    var lowerlimit = year1
-    var upperlimit = year2;
+//     var lowerlimit = year1
+//     var upperlimit = year2;
 
-    if(year1>year2){
-        console.log(typeof(lowerlimit));
-        lowerlimit = year2;
-        upperlimit = year1;
-    }
+//     if(year1>year2){
+//         console.log(typeof(lowerlimit));
+//         lowerlimit = year2;
+//         upperlimit = year1;
+//     }
     
 
-    //console.log('lat1 = ',lat1,' lat2 = ',lat2,' range = ',range)
-    var datafetched = [];
-    var totalTime = 0;
-    callsqlfun(range,0,year1,year2);
+//     //console.log('lat1 = ',lat1,' lat2 = ',lat2,' range = ',range)
+//     var datafetched = [];
+//     var totalTime = 0;
+//     callsqlfun(range,0,year1,year2);
 
-    function callsqlfun(range,i,year1,year2) {
-        const starttime = Date.now();
-        console.log('start time = ',starttime)
+//     function callsqlfun(range,i,year1,year2) {
+//         const starttime = Date.now();
+//         console.log('start time = ',starttime)
 
-        var sql = `Select year,NumberTerroristIncidents,Entity from dbo.ti where year between '${lowerlimit}' and '${upperlimit}'`;
+//         var sql = `Select year,NumberTerroristIncidents,Entity from dbo.ti where year between '${lowerlimit}' and '${upperlimit}'`;
        
-        if(i==range){
-            var newobj = {};
-            newobj["totalTime"] = totalTime;
-            datafetched.push(newobj)
-            res.json(datafetched);
-        }
-        else {
+//         if(i==range){
+//             var newobj = {};
+//             newobj["totalTime"] = totalTime;
+//             datafetched.push(newobj)
+//             res.json(datafetched);
+//         }
+//         else {
 
-            const request = new Request(sql,(err, rowCount, rows) => {
-                if (err) {
-                    console.error(err.message);
-                } else {
-                    var newobj = {};
-                    newobj["count"] = rowCount;
-                    newobj["rows"] = rows;
-                    newobj["timeTaken"] = Date.now() - starttime; 
-                    totalTime = totalTime + newobj["timeTaken"];
-                    datafetched.push(newobj);
+//             const request = new Request(sql,(err, rowCount, rows) => {
+//                 if (err) {
+//                     console.error(err.message);
+//                 } else {
+//                     var newobj = {};
+//                     newobj["count"] = rowCount;
+//                     newobj["rows"] = rows;
+//                     newobj["timeTaken"] = Date.now() - starttime; 
+//                     totalTime = totalTime + newobj["timeTaken"];
+//                     datafetched.push(newobj);
                     
-                }
-            });
+//                 }
+//             });
         
-            request.on('requestCompleted', function () { 
+//             request.on('requestCompleted', function () { 
                 
-                callsqlfun(range,++i,year1,year2);
+//                 callsqlfun(range,++i,year1,year2);
 
-            });
+//             });
 
-            conn.execSql(request);
-        }
-    }
-})
+//             conn.execSql(request);
+//         }
+//     }
+// })
 
-//************form5 quiz3 function database****************************
-Router.post("/form5q3", (req,res)=>{
-    console.log('in database fun form5q3');
-    var year1 = req.body.a1;
-    var year2 = req.body.a2;
-    var range = req.body.a3;
+// //************form5 quiz3 function database****************************
+// Router.post("/form5q3", (req,res)=>{
+//     console.log('in database fun form5q3');
+//     var year1 = req.body.a1;
+//     var year2 = req.body.a2;
+//     var range = req.body.a3;
 
     
-    var lowerlimit = year1
-    var upperlimit = year2;
+//     var lowerlimit = year1
+//     var upperlimit = year2;
 
-    if(year1>year2){
-        console.log(typeof(lowerlimit));
-        lowerlimit = year2;
-        upperlimit = year1;
-    }
+//     if(year1>year2){
+//         console.log(typeof(lowerlimit));
+//         lowerlimit = year2;
+//         upperlimit = year1;
+//     }
     
 
-    //console.log('lat1 = ',lat1,' lat2 = ',lat2,' range = ',range)
-    var datafetched = [];
-    var totalTime = 0;
-    callsqlfun(range,0,year1,year2);
+//     //console.log('lat1 = ',lat1,' lat2 = ',lat2,' range = ',range)
+//     var datafetched = [];
+//     var totalTime = 0;
+//     callsqlfun(range,0,year1,year2);
 
-    function callsqlfun(range,i,year1,year2) {
-        const starttime = Date.now();
-        console.log('start time = ',starttime)
+//     function callsqlfun(range,i,year1,year2) {
+//         const starttime = Date.now();
+//         console.log('start time = ',starttime)
 
-        var sql = `select count(NumberTerroristIncidents) as count,t.Entity as name from dbo.sp s, dbo.ti t where s.Prevalence between  ${lowerlimit} and  ${upperlimit} and s.Code = t.Code group by t.entity`;
-        if(i==range){
-            var newobj = {};
-            newobj["totalTime"] = totalTime;
-            datafetched.push(newobj)
-            res.json(datafetched);
-        }
-        else {
+//         var sql = `select count(NumberTerroristIncidents) as count,t.Entity as name from dbo.sp s, dbo.ti t where s.Prevalence between  ${lowerlimit} and  ${upperlimit} and s.Code = t.Code group by t.entity`;
+//         if(i==range){
+//             var newobj = {};
+//             newobj["totalTime"] = totalTime;
+//             datafetched.push(newobj)
+//             res.json(datafetched);
+//         }
+//         else {
 
-            const request = new Request(sql,(err, rowCount, rows) => {
-                if (err) {
-                    console.error(err.message);
-                } else {
-                    var newobj = {};
-                    newobj["count"] = rowCount;
-                    newobj["rows"] = rows;
-                    newobj["timeTaken"] = Date.now() - starttime; 
-                    totalTime = totalTime + newobj["timeTaken"];
-                    datafetched.push(newobj);
+//             const request = new Request(sql,(err, rowCount, rows) => {
+//                 if (err) {
+//                     console.error(err.message);
+//                 } else {
+//                     var newobj = {};
+//                     newobj["count"] = rowCount;
+//                     newobj["rows"] = rows;
+//                     newobj["timeTaken"] = Date.now() - starttime; 
+//                     totalTime = totalTime + newobj["timeTaken"];
+//                     datafetched.push(newobj);
                     
-                }
-            });
+//                 }
+//             });
         
-            request.on('requestCompleted', function () { 
+//             request.on('requestCompleted', function () { 
                 
-                callsqlfun(range,++i,year1,year2);
+//                 callsqlfun(range,++i,year1,year2);
 
-            });
+//             });
 
-            conn.execSql(request);
-        }
-    }
-})
+//             conn.execSql(request);
+//         }
+//     }
+// })
 
 module.exports = Router;
 
