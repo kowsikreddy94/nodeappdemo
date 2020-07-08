@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Assignment 5</title>
+  <title>Assignment 6</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link type="text/css" rel="stylesheet" href="style.css"> -->
   <script type="text/javascript" src="js/index.js"></script>
+  <!-- <script type="text/javascript" src="js/elasticlunr.min.js"></script> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -28,19 +29,21 @@
 
   <div class="content">
     <h2>Search</h2>
-    <h3 id='seconds-counter'> </h3>
-        <script>
-            var seconds = 0;
-            var el = document.getElementById('seconds-counter');
-    
-            function incrementSeconds() {
-                seconds += 1;
-                el.innerText = "Counter " + seconds + " seconds.";
-            }
-            
-            var cancel = setInterval(incrementSeconds, 1000);
-           
-        </script>
+    <!-- ********counter code************* -->
+    <!-- <h3 id='seconds-counter'> </h3>
+    <script>
+      
+        var seconds = 0;
+        var el = document.getElementById('seconds-counter');
+
+        function incrementSeconds() {
+            seconds += 1;
+            el.innerText = "Counter " + seconds + " seconds.";
+        }
+        
+        var cancel = setInterval(incrementSeconds, 1000);
+        
+    </script> -->
 
   <div class="container-fluid">
     <div class="row">
@@ -51,6 +54,16 @@
       <div class="col-lg-11" id="IP"></div>
     </div>
   </div>
+<br>
+
+<form class="form-inline" name="getSearch" action="/index" onsubmit="return search_name()" method="POST">
+  <button type="submit" class="btn btn-default">Get Search</button>
+</form>
+<br>
+
+<form class="form-inline" name="findFreuency" action="/index" onsubmit="return findFreuencyf()" method="POST">
+  <button type="submit" class="btn btn-default">Get Frequency Search</button>
+</form>
 <br>
 
 <!-- <div>AWS.JPG</div>
@@ -146,53 +159,6 @@
 </form>
 <br>
 
-<form class="form-inline" name="form3q3" action="/index" onsubmit="return form3q3f()" method="post">
-<div class="form-group">
-  <label  for="a1">Enter Prevalence 1:</label>
-  <input class="form-control" placeholder="Enter Prevalence 1" type="text" id="a1" name="a1" required>
-</div> 
-<div class="form-group">
-  <label  for="a2">Enter Prevalence 2 :</label>
-  <input class="form-control" placeholder="Enter Prevalence 2" type="text" id="a2" name="a2" required>
-</div> 
-  <button type="submit" class="btn btn-default">Search Query</button>
-</form>
-<br>  
-
-<form class="form-inline" name="form4q3" action="/index" onsubmit="return form4q3f()" method="post">
-<div class="form-group">
-  <label  for="a1">Enter YEAR 1 :</label>
-  <input class="form-control" placeholder="Enter YEAR 1" type="text" id="a1" name="a1" required>
-</div> 
-<div class="form-group">
-  <label  for="a2">Enter YEAR 2:</label>
-  <input class="form-control" placeholder="Enter YEAR 2" type="text" id="a2" name="a2" required>
-</div> 
-<div class="form-group">
-  <label  for="a3">Enter No of times to Query from DB:</label>
-  <input class="form-control" placeholder="Enter No of times to Query" type="number" id="a3" name="a3" required>
-</div>
-   
-<button type="submit" class="btn btn-default">Search Query</button>
-</form>
-<br>
-
-<form class="form-inline" name="form5q3" action="/index" onsubmit="return form5q3f()" method="post">
-<div class="form-group">
-  <label  for="a1">Enter Prevalence 1:</label>
-  <input class="form-control" placeholder="Enter Prevalence 1" type="text" id="a1" name="a1" required>
-</div> 
-<div class="form-group">
-  <label  for="a2">Enter Prevalence 2 :</label>
-  <input class="form-control" placeholder="Enter Prevalence 2" type="text" id="a2" name="a2" required>
-</div> 
-<div class="form-group">
-  <label  for="a3">Enter No of times to Query from DB:</label>
-  <input class="form-control" placeholder="Enter No of times to Query" type="number" id="a3" name="a3" required>
-</div>
-  <button type="submit" class="btn btn-default">Search Query</button>
-</form>
-<br> 
 -->
 
     <div id="forChart">
