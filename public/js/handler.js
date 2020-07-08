@@ -72,7 +72,7 @@ Router.get("/getIP", (req,resp)=>{
         
         //code to count each word in a file
         Router.post("/most_frequent", (req,resp)=>{ 
-            var file = __dirname+'/../img/numberOfTimes.txt';
+            var file = __dirname+'/../img/NumberOfTimes.txt';
             
             // read file from current directory
             fs.readFile(file, 'utf8', function (err, data) {
