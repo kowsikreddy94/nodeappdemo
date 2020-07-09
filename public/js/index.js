@@ -29,7 +29,7 @@ function enter_sentence_disp(data) {
           {
           var div = document.createElement("div");
           div.style.padding = '20px';
-          div.innerHTML = " Name = "+ data.green[i].name;
+          div.innerHTML = " word = "+ data.green[i].name;
           mainContainer.appendChild(div); 
           }
       }
@@ -41,7 +41,7 @@ function enter_sentence_disp_red(data) {
           {
           var div = document.createElement("div");
           div.style.padding = '20px';
-          div.innerHTML = " Name = "+ data.red[i];
+          div.innerHTML = " word = "+ data.red[i];
           mainContainer.appendChild(div); 
           }
       }
