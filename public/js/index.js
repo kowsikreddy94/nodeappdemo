@@ -22,7 +22,7 @@ function enter_sentence() {
 
 function enter_sentence_disp(data) {
   document.getElementById("myData").innerHTML = "";
-  document.getElementById("output_div").innerHTML = "";
+  //document.getElementById("output_div").innerHTML = "";
       var mainContainer = document.getElementById("myData");
       for (var i = 0; i < data.green.length; i++) {
           if(data.green[i])
