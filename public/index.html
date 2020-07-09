@@ -29,6 +29,27 @@
 
   <div class="content">
     <h2>Search</h2>
+    <!-- -------------------------------------Enter data for english----------------------------------------------- -->
+  <!-- <div class="mb-10">
+    <h4>Please enter sentence : </h4>
+<form class="form-inline" name="FormSentence" action="/get_data" onsubmit="return enter_sentence()" method="POST">
+  <label  for="Search_a1">Enter Your Sentence :</label>
+  <input placeholder="Enter Sentence" type="text" id="SenId" name="SenName" required>
+  <button type="submit" class="btn btn-default col-lg-1">Get Search</button>
+</form>
+  </div>
+</br> -->
+
+<form class="form-inline" name="FormSentence" action="/index" onsubmit="return enter_sentence()" method="post">
+    
+  <div class="form-group">
+    <label  for="a1">Enter Your Sentence :</label>
+    <input class="form-control" placeholder="Enter Your Sentence:" type="text" id="SenId" name="SenId" required>
+  </div> 
+           
+  <button type="submit" class="btn btn-default">Search Query</button>
+
+</form>
     <!-- ********counter code************* -->
     <!-- <h3 id='seconds-counter'> </h3>
     <script>
@@ -45,7 +66,7 @@
         
     </script> -->
 
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
     <div class="row">
       <form class="form-inline" name="getIP" action="/index" onsubmit="return getIPf()" method="GET">
         <button type="submit" class="btn btn-default col-lg-1">Get IP Address</button>
@@ -64,7 +85,7 @@
 <form class="form-inline" name="findFreuency" action="/index" onsubmit="return findFreuencyf()" method="POST">
   <button type="submit" class="btn btn-default">Get Frequency Search</button>
 </form>
-<br>
+<br> -->
 
 <!-- <div>AWS.JPG</div>
 <div class="text-center">
@@ -160,7 +181,7 @@
 <br>
 
 -->
-
+<!-- <font>casccas</font><font color="green">This is some text!</font> -->
     <div id="forChart">
 
     </div>    
@@ -172,20 +193,21 @@
       </p>
     </figure>
 
-    <table style="width:100%" class="table">
+    <!-- <table style="width:100%" class="table">
       <tr>
         <td>
           <div id="myData">  </div>
         </td>
       </tr>
-    </table>
+    </table> -->
 
     <div class="container">
       <table style="width:100%" class="table table-bordered" id="showData">
         
       </table>
     </div>
-  
+    <div id="myData">  </div>
+    <div id="myDataNo">  </div>
   </div>
 
 </body>

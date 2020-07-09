@@ -16,6 +16,103 @@ Router.get("/", (req,res)=>{
 })
 
 
+Router.post("/enterSentence", (req,resp)=>{ 
+    var inp = req.body.Input;
+    var out =[];
+    var array = inp.toString().split(/\s+/);
+    console.log(array);
+    var a = 0;
+    for(var i=0;i<array.length;i++)
+    {
+        var inputName = String(array[i]);
+        // if(i==array.length-1){
+        //     var inputName = String(array[i].substring(0,array[i].length));
+        // }
+        // else{
+        //     var inputName = String(array[i].substring(0,array[i].length-1));
+        // }
+    //   findInFiles.find("[E,e]lizabeth", '.', '.txt$')
+    findInFiles.findSync(inputName, '.', 'EnglishWordsMostFreq.txt')
+      .then(function(results) {
+        //   console.log("results = ", results)
+          for (var result in results) {
+              var new_obj ={};
+              var res = results[result];
+              new_obj["name"]=res.matches[0];
+              new_obj["count"]=res.count;
+              new_obj["result"]=result;
+              out.push(new_obj);
+              console.log('found "' + res.matches[0] + '" ' + res.count+ ' times in "' + result + '"');     
+          }
+          a++;
+          if(a==array.length){
+            resp.send(out);
+          }
+      });
+    }
+    });
+
+    Router.post("/enterSentence", (req,resp)=>{ 
+        // var inp = req.query.stop_word;
+        console.log("in entertext router");
+        var inp = req.body.Input;
+        var out =[];
+        var array = inp.toString().split(/\s+/);
+        console.log(array);
+        var a = 0;
+        var foundText = [];
+        var outObj = {}
+        var arr = [];
+        for(var i=0;i<array.length;i++) {
+            var inputName = String(array[i]);
+    
+        findInFiles.findSync(inputName, '.', 'EnglishWordsMostFreq.txt')
+          .then(function(results) {
+              
+            //   console.log("results = ", results)
+              for (var result in results) {
+                 // var new_obj ={};
+                  var res = results[result];
+                  var new_obj = {}
+                  
+                  new_obj["name"]=res.matches[0];
+                  foundText.push(res.matches[0]);
+                //   new_obj["count"]=res.count;
+                //   new_obj["result"]=result;
+                  out.push(new_obj);
+                  console.log('found "' + res.matches[0] + '" ' + res.count+ ' times in "' + result + '"');     
+              }
+              a++;
+              if(a==array.length){
+               
+          var flag = false;
+          
+          for(i in array){ 
+              flag = false ;
+              for(j in foundText){ 
+           if(array[i]==foundText[j]){
+               flag =true;
+               break;
+           }
+           
+        }
+       if(flag==false){   
+           arr.push(array[i])
+           //flag = false;
+      }
+      
+    }
+    outObj["green"] = out;
+    outObj["red"] = arr;
+    console.log("outObj = ",outObj);
+    resp.send(outObj)
+              }
+          });
+    
+    
+        }
+        });
+
 const superagent = require('superagent');
 Router.get("/getIP", (req,resp)=>{
     var data;

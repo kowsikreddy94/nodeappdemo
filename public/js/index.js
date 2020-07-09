@@ -1,3 +1,82 @@
+function enter_sentence() {
+  console.log("enter_sentence");
+   var a1 = document.forms["FormSentence"]["SenId"].value;
+  // var a3 = document.forms["form1"]["a3"].value;
+    fetch('/enterSentence', 
+    {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({Input: a1})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      enter_sentence_disp(data);
+      enter_sentence_disp_red(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    }); 
+    return false;
+}
+
+function enter_sentence_disp(data) {
+  document.getElementById("myData").innerHTML = "";
+  document.getElementById("output_div").innerHTML = "";
+      var mainContainer = document.getElementById("myData");
+      for (var i = 0; i < data.green.length; i++) {
+          if(data.green[i])
+          {
+          var div = document.createElement("div");
+          div.style.padding = '20px';
+          div.innerHTML = " Name = "+ data.green[i].name;
+          mainContainer.appendChild(div); 
+          }
+      }
+}
+function enter_sentence_disp_red(data) {
+      var mainContainer = document.getElementById("myDataNo");
+      for (var i = 0; i < data.red.length; i++) {
+          if(data.red[i])
+          {
+          var div = document.createElement("div");
+          div.style.padding = '20px';
+          div.innerHTML = " Name = "+ data.red[i];
+          mainContainer.appendChild(div); 
+          }
+      }
+}
+// function enter_sentence_disp(backendData,a1) {
+//   // var Inputarray = a1.toString().split(/\s+/);
+//   // var mainContainer = document.getElementById("myData");
+//   // var mainContainer1 = document.getElementById("myDataNo");
+//   // for(var i=0;i<Inputarray.length;i++)
+//   // {
+//   //   for(var j=0;j<backendData.length;j++)
+//   //   {
+//   //     if(Inputarray[i] == backendData[j])
+//   //     {
+//   //       var div = document.createElement("div");
+//   //       div.style.padding = '20px';
+//   //       div.innerHTML = "Name " + backendData[j].name;
+//   //       mainContainer.appendChild(div); 
+//   //     }
+//   //     else{
+//   //       var div1 = document.createElement("div");
+//   //       div1.style.padding = '20px';
+//   //       div1.innerHTML = "Name " + Inputarray[i].name;
+//   //       mainContainer1.appendChild(div1); 
+//   //     }
+//   //   }
+//   // }
+//   var red = backendData.red;
+//   var green = backendData.green;
+//   console.log("red = ",red);
+//   console.log(green);
+
+// }
+
+
 //*******************Form1 Function ********************************
 function getIPf() {
   console.log("getIP");
