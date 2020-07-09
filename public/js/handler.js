@@ -35,96 +35,122 @@ Router.get("/getIP", (req,resp)=>{
 ///------------------------------------search wode in doc-------------------------------
 // https://www.npmjs.com/package/find-in-files
 // fs.readFile('/AAESH_CLASSES/SUMMER2020/AdvanceDB/Assignment_6/KOWSHIK_SOLUTION/public/img', 'utf8', function (err,data) {
-    Router.post("/get_data", (req,resp)=>{ 
-        var out =[];
-        var array = fs.readFileSync(__dirname+'/../img/names.txt').toString().split(/\s+/);
-        var a = 0;
-        for(var i=0;i<array.length;i++)
-        {
-            var inputName = String(array[i]);
-            // if(i==array.length-1){
-            //     var inputName = String(array[i].substring(0,array[i].length));
-            // }
-            // else{
-            //     var inputName = String(array[i].substring(0,array[i].length-1));
-            // }
-        //   findInFiles.find("[E,e]lizabeth", '.', '.txt$')
-        findInFiles.findSync(inputName, '.', 'PrideandPrejudice.txt')
-          .then(function(results) {
-            //   console.log("results = ", results)
-              for (var result in results) {
-                  var new_obj ={};
-                  var res = results[result];
-                  new_obj["name"]=res.matches[0];
-                  new_obj["count"]=res.count;
-                  new_obj["result"]=result;
-                  out.push(new_obj);
-                  console.log('found "' + res.matches[0] + '" ' + res.count+ ' times in "' + result + '"');     
-              }
-              a++;
-              if(a==array.length){
-                resp.send(out);
-              }
-          });
+Router.post("/get_data", (req,resp)=>{ 
+    var out =[];
+    var array = fs.readFileSync(__dirname+'/../img/names.txt').toString().split(/\s+/);
+    var a = 0;
+    for(var i=0;i<array.length;i++)
+    {
+        var inputName = String(array[i]);
+        // if(i==array.length-1){
+        //     var inputName = String(array[i].substring(0,array[i].length));
+        // }
+        // else{
+        //     var inputName = String(array[i].substring(0,array[i].length-1));
+        // }
+    //   findInFiles.find("[E,e]lizabeth", '.', '.txt$')
+    findInFiles.findSync(inputName, '.', 'PrideandPrejudice.txt')
+        .then(function(results) {
+        //   console.log("results = ", results)
+            for (var result in results) {
+                var new_obj ={};
+                var res = results[result];
+                new_obj["name"]=res.matches[0];
+                new_obj["count"]=res.count;
+                new_obj["result"]=result;
+                out.push(new_obj);
+                console.log('found "' + res.matches[0] + '" ' + res.count+ ' times in "' + result + '"');     
+            }
+            a++;
+            if(a==array.length){
+            resp.send(out);
+            }
+        });
+    }
+});
+    
+    
+//code to count each word in a file
+Router.post("/most_frequent", (req,resp)=>{ 
+    var file = __dirname+'/../img/NumberOfTimes.txt';
+    
+    // read file from current directory
+    fs.readFile(file, 'utf8', function (err, data) {
+        if (err) throw err;
+        var wordsArray = splitByWords(data);
+        var wordsMap = createWordMap(wordsArray);
+        var finalWordsArray = sortByCount(wordsMap);
+    
+        console.log('finalWordsArray = ',finalWordsArray);
+        console.log('The word "' + finalWordsArray[0].name + '" appears the most in the file ' +
+        finalWordsArray[0].total + ' times');
+        resp.send(finalWordsArray);
+        
+    });
+    
+    function splitByWords (text) {
+        // split string by spaces (including spaces, tabs, and newlines)
+        var wordsArray = text.split(/\s+/);
+        console.log('wordsArray = ',wordsArray);
+        return wordsArray;
+    }
+    
+    function createWordMap (wordsArray) {
+        // create map for word counts
+        var wordsMap = {};
+        wordsArray.forEach(function (key) {
+        if (wordsMap.hasOwnProperty(key)) {
+            wordsMap[key]++;
+        } else {
+            wordsMap[key] = 1;
         }
         });
-        
-        
-        //code to count each word in a file
-        Router.post("/most_frequent", (req,resp)=>{ 
-            var file = __dirname+'/../img/NumberOfTimes.txt';
-            
-            // read file from current directory
-            fs.readFile(file, 'utf8', function (err, data) {
-              if (err) throw err;
-              var wordsArray = splitByWords(data);
-              var wordsMap = createWordMap(wordsArray);
-              var finalWordsArray = sortByCount(wordsMap);
-            
-              console.log('finalWordsArray = ',finalWordsArray);
-              console.log('The word "' + finalWordsArray[0].name + '" appears the most in the file ' +
-                finalWordsArray[0].total + ' times');
-              resp.send(finalWordsArray);
-                
-            });
-            
-            function splitByWords (text) {
-              // split string by spaces (including spaces, tabs, and newlines)
-              var wordsArray = text.split(/\s+/);
-              console.log('wordsArray = ',wordsArray);
-              return wordsArray;
-            }
-            
-            function createWordMap (wordsArray) {
-              // create map for word counts
-              var wordsMap = {};
-              wordsArray.forEach(function (key) {
-                if (wordsMap.hasOwnProperty(key)) {
-                  wordsMap[key]++;
-                } else {
-                  wordsMap[key] = 1;
-                }
-              });
-              return wordsMap;
-            }
-            
-            function sortByCount (wordsMap) {
-              // sort by count in descending order
-              var finalWordsArray = [];
-              finalWordsArray = Object.keys(wordsMap).map(function(key) {
-                return {
-                  name: key,
-                  total: wordsMap[key]
-                };
-              });
-            
-              finalWordsArray.sort(function(a, b) {
-                return b.total - a.total;
-              });
-              return finalWordsArray;
-            }
-            });
+        return wordsMap;
+    }
+    
+    function sortByCount (wordsMap) {
+        // sort by count in descending order
+        var finalWordsArray = [];
+        finalWordsArray = Object.keys(wordsMap).map(function(key) {
+        return {
+            name: key,
+            total: wordsMap[key]
+        };
+        });
+    
+        finalWordsArray.sort(function(a, b) {
+        return b.total - a.total;
+        });
+        return finalWordsArray;
+    }
+});
 
+// var FlexSearch = require("flexsearch");
+// var index = new FlexSearch();
+// index.add(1,"Is that his design in settling here settling settling");
+
+// index.search("settling", {
+ 
+//     limit: 1000,
+//     threshold: 5,
+//     depth: 3
+    
+// }, function(results){
+    
+//     // ....
+//     console.log("index search results = ",results)
+
+//     for (var result in results) {
+//         var new_obj ={};
+//         var res = results[result];
+//         console.log(res);
+//         // new_obj["name"]=res.matches[0];
+//         new_obj["count"]=res.count;
+//         new_obj["result"]=result;
+//         // out.push(new_obj);
+//         // console.log('found "' + res.matches[0] + '" ' + res.count+ ' times in "' + result + '"');     
+//     }
+// });
 
 // ----------------------------------------------Form1-------------------------------------------------
 // Router.post("/form1", (req,res)=>{
